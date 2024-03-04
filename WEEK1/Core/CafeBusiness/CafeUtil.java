@@ -1,59 +1,54 @@
 import java.util.ArrayList;
-import java.io.Console;
 import java.util.Scanner;
 
 public class CafeUtil {
 
-	public int calculateStreakGoal() {
+    public int calculateStreakGoal() {
         int sum = 0;
         for (int i = 1; i <= 10; i++) {
             sum += i;
         }
         return sum;
     }
-	//	Ninja Bonus:
-	public int calculateStreakGoal(int numWeeks) {
+
+    // Ninja Bonus:
+    public int calculateStreakGoal(int numWeeks) {
         int sum = 0;
         for (int i = 1; i <= numWeeks; i++) {
             sum += i;
         }
         return sum;
     }
-	
-	/*	Given an array of item prices from an order, sum all of the prices in the array and return the total.
-	 * Don't forget to test your code! Find the lines of test code for this method in TestCafe.java and uncomment it before you compile and run.
-	 */
-	public double getOrderTotal(double[] prices) {
-		double sum = 0 ; 
-		for (double price : prices) {
-			sum += price ;
-		}
-		return sum ;
-	};
-	
 
-	public void displayMenu(ArrayList<String> menuItems) {
-		for (int count = 0; count < menuItems.size(); count++) {
-			String message = count + " " + menuItems.get(count);
-			System.out.println(message);
-		}
-		
-	};
-	
+    /* Given an array of item prices from an order, sum all of the prices in the array and return the total.
+     */
+    public double getOrderTotal(double[] prices) {
+        double sum = 0;
+        for (double price : prices) {
+            sum += price;
+        }
+        return sum;
+    }
 
-	public void addCustomer(ArrayList<String> customers) {
+    public void displayMenu(ArrayList<String> menuItems) {
+        for (int count = 0; count < menuItems.size(); count++) {
+            String message = (count + 1) + " " + menuItems.get(count); // Adjust index to start from 1
+            System.out.println(message);
+        }
+    }
+
+    public void addCustomer(ArrayList<String> customers) {
         System.out.println("Please enter your name:");
 
-        Scanner scanner = new Scanner(System.in);
-        String userName = scanner.nextLine();
+        try (Scanner scanner = new Scanner(System.in)) {
+            String userName = scanner.nextLine();
 
-        printGreetingAndQueuePosition(userName, customers.size());
+            printGreetingAndQueuePosition(userName, customers.size());
 
-        customers.add(userName);
+            customers.add(userName);
 
-        printCustomerList(customers);
-
-        //scanner.close(); // Close the scanner to prevent resource leak
+            printCustomerList(customers);
+        }
     }
 
     private void printGreetingAndQueuePosition(String userName, int queueSize) {
@@ -64,8 +59,9 @@ public class CafeUtil {
     private void printCustomerList(ArrayList<String> customers) {
         System.out.println("Order ------  Customer Name%");
         for (int count = 0; count < customers.size(); count++) {
-            System.out.printf("%d 	------  %s%n", count, customers.get(count));
+            System.out.printf("%d ------ %s%n", count + 1, customers.get(count));
         }
         System.out.println("------------------------");
     }
 }
+
